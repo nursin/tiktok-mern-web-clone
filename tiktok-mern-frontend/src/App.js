@@ -1,38 +1,37 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 import Video from './Video';
+import axios from './axios';
 
 function App() {
+  const [videos, setVideos] = useState();
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const response = await axios.get('/v1/posts');
+      setVideos(response.data);
+
+      return response;
+    }
+
+    fetchPosts();
+  }, []);
+  console.log(videos)
   return (
     <div className="app">
       {/* app container */}
       <div className='app__videos'>
-        <Video
-          url={'https://assets.mixkit.co/videos/preview/mixkit-portrait-of-a-fashion-woman-with-silver-makeup-39875-large.mp4'}
-          channel={"bobbb"}
-          description={"Dramatization nation"}
-          song={"EDM Nation - Best song ever"}
-          shares={12}
-          likes={100}
-          messages={250}
-        />
-        <Video
-          url={'https://assets.mixkit.co/videos/preview/mixkit-womans-feet-splashing-in-the-pool-1261-large.mp4'}
-          channel={"bobbb"}
-          description={"Dramatization nation"}
-          song={"EDM Nation - Best song ever"}
-          shares={34}
-          likes={55}
-          messages={102}
-        />
-        <Video
-          url={'https://assets.mixkit.co/videos/preview/mixkit-silhouette-of-urban-dancer-in-smoke-33898-large.mp4'}
-          channel={"bobbb"}
-          description={"Dramatization nation"}
-          song={"EDM Nation - Best song ever"}
-          shares={58}
-          likes={75}
-          messages={456}
-        />
+        {videos?.map(({ url, channel, description, song, likes, messages, shares }) => (
+          <Video
+            url={url}
+            channel={channel}
+            description={description}
+            song={song}
+            likes={likes}
+            messages={messages}
+            shares={shares}
+          />
+        ))}
       </div>
     </div>
   );
