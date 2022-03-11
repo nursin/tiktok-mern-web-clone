@@ -30,8 +30,16 @@ function Video() {
                 ref={videoRef}
                 src='https://assets.mixkit.co/videos/preview/mixkit-portrait-of-a-fashion-woman-with-silver-makeup-39875-large.mp4' />
 
-            <VideoFooter />
-            <VideoSidebar />
+            <VideoFooter 
+                channel={"bobbb"}
+                description={"Dramatization nation"}
+                song={"EDM Nation - Best song ever"}
+            />
+            <VideoSidebar 
+                shares={12}
+                likes={100}
+                messages={250}
+            />
         </div>
     )
 }
