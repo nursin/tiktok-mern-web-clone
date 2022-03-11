@@ -3,7 +3,7 @@ import './Video.css';
 import VideoFooter from './VideoFooter';
 import VideoSidebar from './VideoSidebar';
 
-function Video() {
+function Video({ url, channel, description, song, likes, messages, shares }) {
     const [playing, setPlaying] = useState(false);
     const videoRef = useRef(null);
 
@@ -24,21 +24,21 @@ function Video() {
     return (
         <div className='video'>
             <video
-            onClick={handleVideoPress}
+                onClick={handleVideoPress}
                 loop
                 className='video__player'
                 ref={videoRef}
-                src='https://assets.mixkit.co/videos/preview/mixkit-portrait-of-a-fashion-woman-with-silver-makeup-39875-large.mp4' />
+                src={url} />
 
-            <VideoFooter 
-                channel={"bobbb"}
-                description={"Dramatization nation"}
-                song={"EDM Nation - Best song ever"}
+            <VideoFooter
+                channel={channel}
+                description={description}
+                song={song}
             />
-            <VideoSidebar 
-                shares={12}
-                likes={100}
-                messages={250}
+            <VideoSidebar
+                shares={shares}
+                likes={likes}
+                messages={messages}
             />
         </div>
     )
